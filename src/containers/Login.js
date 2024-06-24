@@ -41,6 +41,11 @@ export default class Login {
     e.preventDefault()
     const user = {
       type: "Admin",
+      //old code
+      //email: e.target.querySelector(`input[data-testid="employee-email-input"]`).value,
+      //password: e.target.querySelector(`input[data-testid="employee-password-input"]`).value,
+
+      //fixed code
       email: e.target.querySelector(`input[data-testid="admin-email-input"]`).value,
       password: e.target.querySelector(`input[data-testid="admin-password-input"]`).value,
       status: "connected"
@@ -69,7 +74,12 @@ export default class Login {
         localStorage.setItem('jwt', jwt)
       })
     } else {
+      //old code
       return null
+
+      //fixed code?
+      //console.error ('Store is not available');
+      //return Promise.reject(new Error('Store is not available'))
     }
   }
 
@@ -89,7 +99,11 @@ export default class Login {
         return this.login(user)
       })
     } else {
+      //old code
       return null
+
+      //fixed code
+      
     }
   }
 }
