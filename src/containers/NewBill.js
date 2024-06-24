@@ -15,11 +15,32 @@ export default class NewBill {
     this.billId = null
     new Logout({ document, localStorage, onNavigate })
   }
+
+  //old code
   handleChangeFile = e => {
     e.preventDefault()
+    //old code
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
+
+    //fixed code
+    const fileExtension = fileName.split('.').pop().toLowerCase()
+
+    // Check if the file type is jpg, jpeg, or png
+    if (!['jpg', 'jpeg', 'png'].includes(fileExtension)) {
+    alert('Le fichier n\'est pas une image. Son extension doit être .jpg, .jpeg ou .png.')
+    e.target.value = '' // Clears the file input
+    return
+    }
+
+    //handle no file selected
+    if (!file) {
+      return;
+    }
+
+
+    //end fixed code
     const formData = new FormData()
     const email = JSON.parse(localStorage.getItem("user")).email
     formData.append('file', file)
@@ -40,6 +61,14 @@ export default class NewBill {
         this.fileName = fileName
       }).catch(error => console.error(error))
   }
+
+  
+
+
+
+
+
+
   handleSubmit = e => {
     e.preventDefault()
     console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)
